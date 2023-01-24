@@ -1,5 +1,4 @@
-import { on } from "stream";
-import { Project } from "./Project"
+import { Project } from "./Project";
 
 interface ProjectCardProps {
     project: Project;
@@ -11,10 +10,8 @@ function formatDescription(description: string): string {
 };
 
 
-export default function ProjectCard(props: ProjectCardProps) {
-  const { project, onEdit } = props;
-
-  const handleEditClick = (projectBeingEdited: Project) => {
+export default function ProjectCard({ project, onEdit }: ProjectCardProps) {
+   const handleEditClick = (projectBeingEdited: Project) => {
     onEdit(projectBeingEdited);
   }
 
