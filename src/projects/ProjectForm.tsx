@@ -19,7 +19,6 @@ export default function ProjectForm(props: ProjectFormProps) {
   };
 
   const handleChange = (event: any) => {
-    console.log(event);
     const { type, value, checked, name } = event.target;
 
     let updatedValue = type === 'checkbox' ? checked : value;
@@ -31,18 +30,23 @@ export default function ProjectForm(props: ProjectFormProps) {
     };
 
     let updatedProject: Project;
+    // need to do functional update b/c
+    // the new project state is based on the previous project state
+    // so we can keep the project properties that aren't being edited +like project.id
+    // the spread operator (...) is used to
+    // spread the previous project properties and the new change
     setProject((p) => {
         updatedProject = new Project({ ...p, ...change });
         return updatedProject;
     })
-  }
+  };
   
   return (
     <form onSubmit={handleSubmit} className="input-group vertical">
       <label htmlFor="name">Project Name</label>
       <input value={project.name} onChange={handleChange} type="text" name="name" placeholder="enter name" />
       <label htmlFor="description">Project Description</label>
-      <textarea value={project.description} onChange={handleChange} name="description" placeholder="enter description" defaultValue={""} />
+      <textarea value={project.description} onChange={handleChange} name="description" placeholder="enter description" />
       <label htmlFor="budget">Project Budget</label>
       <input value={project.budget} onChange={handleChange} type="number" name="budget" placeholder="enter budget" />
       <label htmlFor="isActive">Active?</label>
